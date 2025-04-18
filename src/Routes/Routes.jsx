@@ -6,6 +6,7 @@ import About from '../pages/About/About';
 import AddCard from '../pages/AddCard/AddCard';
 import AddFavorite from '../pages/AddFavorite/AddFavorite';
 import Error from '../pages/Error/Error';
+import PhoneDetails from '../pages/PhoneDetails/PhoneDetails';
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
+                hydrateFallbackElement: <h1>Loading..</h1>,
                 loader: () => fetch('phones.json'),
                 Component: Home
             },
@@ -29,6 +31,11 @@ const router = createBrowserRouter([
             {
                 path: '/addFavorite',
                 Component: AddFavorite
+            },
+            {
+                path: '/phoneDetails/:id',
+                loader: () => fetch('phones.json'),
+                Component:PhoneDetails
             }
         ]
     }
