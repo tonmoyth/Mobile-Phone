@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router';
 import { FaCartShopping  } from "react-icons/fa6";
 import { MdBookmarkAdd } from "react-icons/md";
+import { CardContext } from '../../Provider/Context';
 
 const Navber = () => {
+    const {card} = useContext(CardContext);
+    
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -21,12 +24,14 @@ const Navber = () => {
                     <li>
                         <NavLink
                         className={({isActive})=> isActive && 'text-green-500' }
-                        to='/about'>Link</NavLink>
+                        to='/about'>About</NavLink>
                     </li>
                     <li>
                         <NavLink
                         className={({isActive})=> isActive && 'text-green-500' }
-                        to='/addCard'><FaCartShopping size={20}/></NavLink>
+                        to='/addCard'><FaCartShopping size={20}/>
+                        </NavLink>
+                        
                     </li>
                    
                     <li>
@@ -52,12 +57,14 @@ const Navber = () => {
                     <li>
                         <NavLink
                         className={({isActive})=> isActive && 'text-green-500' }
-                        to='/about'>Link</NavLink>
+                        to='/about'>About</NavLink>
                     </li>
-                    <li>
+                    <li className='relative'>
                         <NavLink
                         className={({isActive})=> isActive && 'text-green-500' }
-                        to='/addCard'><FaCartShopping size={20}/></NavLink>
+                        to='/addCard'><FaCartShopping size={20}/>
+                        <span>{card.length}</span>
+                        </NavLink>
                     </li>
                    
                     <li>

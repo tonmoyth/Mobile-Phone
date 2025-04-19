@@ -1,9 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getPhones, removeFavorite } from '../../utility/favorite';
+import PhoneCard from '../Phones/PhoneCard';
+import Emty from '../Emty/Emty';
 
 const AddFavorite = () => {
-    return (
+    const [showAll,setShowAll] = useState([]);
+
+    useEffect(()=>{
+        const savePhones = getPhones();
+        setShowAll(savePhones);
+    },[])
+    
+    const removeHandle = (id) => {
+        removeFavorite(id);
+        setShowAll(getPhones())
+       
+    }
+    if(showAll.length < 1){
+       return <Emty></Emty>
+    }
+    
+   return (
         <div>
-            <h1>this is add Favorite section</h1>
+             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-8 gap-8'>
+                
+            {
+                
+                showAll.map(phone => <PhoneCard
+                     key={phone.id} 
+                     phone={phone}
+                     deleteble={true}
+                     removeHandle={removeHandle}
+                    ></PhoneCard>)
+            }
+        </div>
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PhoneCard from './PhoneCard';
+import Button from '../../Ui/Button/Button';
 
 const Phones = ({data}) => {
     const [showAll,setShowAll] = useState([]);
@@ -14,7 +15,7 @@ const Phones = ({data}) => {
     },[data,isShow]);
     
     return (
-        <div className='mb-8'>
+        <div className='mb-8 mx-4'>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-8 gap-8'>
             {
                 showAll.map(phone => <PhoneCard
@@ -23,20 +24,17 @@ const Phones = ({data}) => {
                     ></PhoneCard>)
             }
         </div>
-        <button onClick={()=>{
-            setIsShow(prev=>!prev)
-            if(isShow){
-                window.scroll({
-                    top: 470,
-                    left:0,
-                    behavior:'smooth'
-                })
-            }
-        }} className="relative inline-block px-4 py-2 font-medium group cursor-pointer">
-                <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-                <span className="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
-                <span className="relative text-black group-hover:text-white">{isShow ? 'Show Less' : 'Show All'}</span>
-            </button>
+        
+            <Button onClick={()=>{
+                setIsShow(prev=>!prev)
+                if(isShow){
+                    window.scroll({
+                        top: 470,
+                        left:0,
+                        behavior:'smooth'
+                    })
+                }
+            }} label={isShow ? 'Show Less' : 'Show All'}></Button>
         </div>
     );
 };
